@@ -12,6 +12,8 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Wand2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { eventsService } from '@/lib/events';
+import { useRouter } from 'next/navigation';
 
 const FormSchema = z.object({
   eventName: z.string().min(1, 'El nombre del evento es requerido'),
@@ -27,12 +29,13 @@ type FormValues = z.infer<typeof FormSchema>;
 
 export function CreateEventForm() {
   const [isLoading, setIsLoading] = useState(false);
-  const [generatedDescription, setGeneratedDescription] = useState('');
   const { toast } = useToast();
+  const router = useRouter();
 
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<FormValues>({
     resolver: zodResolver(FormSchema),
@@ -40,20 +43,32 @@ export function CreateEventForm() {
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     setIsLoading(true);
-    setGeneratedDescription('');
     try {
       const result = await generateEventDescription(data);
-      setGeneratedDescription(result.eventDescription);
+      
+      const newEvent = {
+        name: data.eventName,
+        date: new Date(`${data.eventDate}T${data.eventTime}`).toISOString(),
+        location: data.eventLocation,
+        description: result.eventDescription,
+      };
+
+      await eventsService.addEvent(newEvent);
+
       toast({
-        title: "Descripción generada",
-        description: "La descripción de tu evento ha sido creada.",
+        title: "Evento Creado",
+        description: "El nuevo evento ha sido añadido a la lista.",
       });
+      
+      reset();
+      router.push('/eventos');
+
     } catch (error) {
-      console.error('Error generating description:', error);
+      console.error('Error generating description or creating event:', error);
       toast({
         variant: "destructive",
         title: "Error",
-        description: "No se pudo generar la descripción. Inténtalo de nuevo.",
+        description: "No se pudo crear el evento. Inténtalo de nuevo.",
       });
     } finally {
       setIsLoading(false);
@@ -108,20 +123,8 @@ export function CreateEventForm() {
         </CardContent>
         <CardFooter className="flex flex-col items-stretch gap-4">
           <Button type="submit" disabled={isLoading}>
-            {isLoading ? 'Generando...' : <> <Wand2 className="mr-2 h-4 w-4" /> Generar Descripción </>}
+            {isLoading ? 'Creando evento...' : <> <Wand2 className="mr-2 h-4 w-4" /> Generar y Crear Evento </>}
           </Button>
-          {generatedDescription && (
-            <div className="space-y-2 pt-4">
-              <Label htmlFor="generatedDescription">Descripción Generada</Label>
-              <Textarea
-                id="generatedDescription"
-                readOnly
-                value={generatedDescription}
-                rows={5}
-                className="bg-muted focus-visible:ring-accent"
-              />
-            </div>
-          )}
         </CardFooter>
       </form>
     </Card>

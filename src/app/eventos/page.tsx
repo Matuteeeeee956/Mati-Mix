@@ -2,32 +2,10 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Calendar, MapPin, PlusCircle, Ticket } from "lucide-react";
 import Link from "next/link";
+import { eventsService, type Event } from "@/lib/events";
 
-const upcomingEvents = [
-  {
-    name: "Noche de Vinilos",
-    date: "2024-09-28T22:00:00",
-    location: "Club Subterráneo, Ciudad Capital",
-    description: "Una noche especial dedicada al sonido clásico del vinilo. Desde clásicos del house hasta joyas olvidadas del disco."
-  },
-  {
-    name: "Warehouse Rave",
-    date: "2024-10-12T23:00:00",
-    location: "Bodega Industrial 7, Distrito Industrial",
-    description: "Techno industrial y acid en un auténtico almacén. Prepárate para una noche intensa y sin concesiones."
-  },
-];
 
-const pastEvents = [
-  {
-    name: "Sunset Rooftop Party",
-    date: "2024-08-15T18:00:00",
-    location: "Terraza del Sol, Hotel Vista",
-    description: "Despedimos el verano con una sesión de house y disco mientras el sol se pone sobre la ciudad."
-  },
-];
-
-const EventCard = ({ event }: { event: typeof upcomingEvents[0] }) => {
+const EventCard = ({ event }: { event: Event }) => {
   const eventDate = new Date(event.date);
   const formattedDate = eventDate.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
   const formattedTime = eventDate.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
@@ -57,7 +35,10 @@ const EventCard = ({ event }: { event: typeof upcomingEvents[0] }) => {
 };
 
 
-export default function EventsPage() {
+export default async function EventsPage() {
+  const upcomingEvents = await eventsService.getUpcomingEvents();
+  const pastEvents = await eventsService.getPastEvents();
+
   return (
     <div className="container mx-auto py-12 px-4 md:px-6">
       <div className="flex justify-between items-center mb-8 flex-wrap gap-4">
