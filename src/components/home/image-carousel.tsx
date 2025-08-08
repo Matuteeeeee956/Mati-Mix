@@ -13,10 +13,10 @@ import Autoplay from "embla-carousel-autoplay";
 
 const images = [
   { src: "/foto-1.jpg", alt: "DJ mezclando en vivo", hint: "dj mixing" },
-  { src: "https://placehold.co/800x600.png", alt: "Pista de baile llena", hint: "crowd dancing" },
-  { src: "https://placehold.co/800x600.png", alt: "Equipo de DJ", hint: "dj equipment" },
-  { src: "https://placehold.co/800x600.png", alt: "Luces de neón en un club", hint: "neon club" },
-  { src: "https://placehold.co/800x600.png", alt: "DJ con auriculares", hint: "dj headphones" },
+  { src: "/foto-2.jpg", alt: "Pista de baile llena", hint: "crowd dancing" },
+  { src: "/foto-3.jpg", alt: "Equipo de DJ", hint: "dj equipment" },
+  { src: "/foto-4.jpg", alt: "Luces de neón en un club", hint: "neon club" },
+  { src: "/foto-5.jpg", alt: "DJ con auriculares", hint: "dj headphones" },
 ];
 
 export function ImageCarousel() {
