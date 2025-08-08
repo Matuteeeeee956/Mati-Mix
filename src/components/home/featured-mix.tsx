@@ -21,7 +21,7 @@ export function FeaturedMix() {
           </Button>
         </div>
         <Image
-          src="https://placehold.co/600x600.png"
+          src="/foto-6.jpg"
           alt="Portada del Mix"
           data-ai-hint="album cover"
           width={600}

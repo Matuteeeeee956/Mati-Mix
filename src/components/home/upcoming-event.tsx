@@ -21,13 +21,13 @@ export function UpcomingEvent() {
               <li>
                 <div className="grid gap-1">
                   <h3 className="text-xl font-bold flex items-center gap-2"><Calendar className="h-5 w-5 text-accent" /> Fecha y Hora</h3>
-                  <p className="text-muted-foreground">Sábado, 28 de Septiembre, 2024 - 22:00 H</p>
+                  <p className="text-muted-foreground">Sábado, 16 de Agosto, 2025 - 00:00 H</p>
                 </div>
               </li>
               <li>
                 <div className="grid gap-1">
                   <h3 className="text-xl font-bold flex items-center gap-2"><MapPin className="h-5 w-5 text-accent" /> Ubicación</h3>
-                  <p className="text-muted-foreground">Club Subterráneo, Calle Falsa 123, Ciudad Capital</p>
+                  <p className="text-muted-foreground">La estacion, Cordoba, comuna San Roque</p>
                 </div>
               </li>
             </ul>
