@@ -12,7 +12,7 @@ import {
 import Autoplay from "embla-carousel-autoplay";
 
 const images = [
-  { src: "https://placehold.co/800x600.png", alt: "DJ mezclando en vivo", hint: "dj mixing" },
+  { src: "/foto-1.jpg", alt: "DJ mezclando en vivo", hint: "dj mixing" },
   { src: "https://placehold.co/800x600.png", alt: "Pista de baile llena", hint: "crowd dancing" },
   { src: "https://placehold.co/800x600.png", alt: "Equipo de DJ", hint: "dj equipment" },
   { src: "https://placehold.co/800x600.png", alt: "Luces de neón en un club", hint: "neon club" },

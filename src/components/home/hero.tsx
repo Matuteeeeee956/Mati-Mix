@@ -6,7 +6,7 @@ export function Hero() {
   return (
     <section className="relative w-full h-[60vh] md:h-[80vh] text-white">
       <Image
-        src="https://placehold.co/1920x1080.png"
+        src="/dj-home.png"
         alt="DJ en un evento"
         data-ai-hint="dj event"
         fill
